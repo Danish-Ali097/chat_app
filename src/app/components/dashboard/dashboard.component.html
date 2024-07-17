@@ -1,0 +1,41 @@
+<div class="dashboard-container">
+    <div class="sidebar">
+        <div>
+            <button mat-raised-button (click)="logout()">
+                Logout
+            </button>
+        </div>
+        <div class="chat-list">
+            <div class="chat" *ngFor="let chat of chats" (click)="selectChat(chat)"
+                [class.selected]="chat === selectedChat">
+                {{ chat.id }}
+            </div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div *ngIf="selectedChat" class="chat-container">
+            <div class="messages" #messagesContainer>
+                <div class="message" *ngFor="let message of selectedChat.messages">
+                    <p [ngStyle]="{'text-align': message.from === mongoId ? 'right' : 'left'}">
+                        <strong>{{ message.from }}</strong>: {{ message.content }}
+                    </p>
+                    <p [ngStyle]="{'text-align': message.from === mongoId ? 'right' : 'left'}" class="timestamp">{{ message?.sentDate | date:'shortTime' }}</p>
+                </div>
+            </div>
+
+            <div class="message-input">
+                <mat-form-field appearance="fill">
+                    <mat-label>Enter your message</mat-label>
+                    <input matInput [(ngModel)]="newMessage" (keyup.enter)="sendMessage()">
+                    <button mat-button matSuffix mat-icon-button aria-label="Send" (click)="sendMessage()">
+                        <mat-icon>send</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+        </div>
+        <div *ngIf="!selectedChat" class="empty-state">
+            Select a chat to start messaging
+        </div>
+    </div>
+</div>

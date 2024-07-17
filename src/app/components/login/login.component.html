@@ -1,0 +1,46 @@
+<div class="login-container">
+    <h1>
+        MODL APP
+    </h1>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <mat-slide-toggle class="custom-switch" formControlName="isEmailLogin">
+            <span *ngIf="form.get('isEmailLogin')?.value">Email</span>
+            <span *ngIf="!form.get('isEmailLogin')?.value">Phone</span>
+        </mat-slide-toggle>
+
+        <mat-form-field *ngIf="form.get('isEmailLogin')?.value" appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email">
+            <mat-error *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
+                <span *ngIf="form.get('email')?.errors?.['required']">Email is required</span>
+                <span *ngIf="form.get('email')?.errors?.['email']">Enter a valid email</span>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="!form.get('isEmailLogin')?.value" appearance="fill">
+            <mat-label>Code</mat-label>
+            <input matInput formControlName="code">
+            <mat-error *ngIf="form.get('code')?.invalid && form.get('code')?.touched">
+                Code is required
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="!form.get('isEmailLogin')?.value" appearance="fill">
+            <mat-label>Phone</mat-label>
+            <input matInput formControlName="phone">
+            <mat-error *ngIf="form.get('phone')?.invalid && form.get('phone')?.touched">
+                Phone is required
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input matInput [type]="'password'" formControlName="password">
+            <mat-error *ngIf="form.get('password')?.invalid && form.get('password')?.touched">
+                Password is required
+            </mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Submit</button>
+    </form>
+</div>

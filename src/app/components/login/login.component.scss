@@ -1,0 +1,43 @@
+.login-container {
+    display: block;
+    box-sizing: border-box;
+    width: 50%;
+    margin: 0 auto;
+
+    > h1 {
+        text-align: center;
+        line-height: 5rem;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    mat-form-field {
+        width: 100%;
+    }
+
+    .custom-switch ::ng-deep {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .mdc-form-field {
+            .mdc-switch {
+                    width: 25rem !important;
+            
+                    .mdc-switch__track {
+                        height: 2rem !important;
+                    }
+                }
+            
+                .mdc-label {
+                    position: absolute;
+                    left: 50%;
+                    transform: translateX(-50%);
+                }
+        }
+    }
+}
